@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/14 15:44:24 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/15 16:07:50 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,31 @@ typedef struct  s_mouse_info
 	int			set;
 }				t_mouse_info;
 
+typedef	struct	s_coord
+{
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+	int x3;
+	int y3;
+	int x4;
+	int y4;
+}				t_coord;
+
+typedef struct	s_info
+{
+	int 	x1;
+	int 	x2;
+	int 	y1;
+	int 	y2;
+	void 	*ptr;
+	void 	*win;
+}				t_info;
+
 char		**ft_read_input(char *input);
 int			deal_mouse(int button, int x, int y, t_mouse_info *info);
 void		ft_put_tab(char **tab);
 void		ft_realloc(char *str);
+void		ft_line(t_mouse_info *info);
+void		ft_line_tiles(t_info *info);

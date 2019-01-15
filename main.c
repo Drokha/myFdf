@@ -6,13 +6,13 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/14 15:34:52 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:41:50 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	line(t_mouse_info *info)
+void	ft_line(t_mouse_info *info)
 {
 	int dx;
 	int sx;
@@ -66,7 +66,7 @@ int		deal_mouse(int button, int x, int y, t_mouse_info *info)
 	{
 		info->x2 = x;
 		info->y2 = y;
-		line(info);
+		ft_line(info);
 		ft_resest_info(info);
 	}
 	return (info->set);
