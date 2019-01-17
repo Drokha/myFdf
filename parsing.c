@@ -6,11 +6,11 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:56:22 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/17 14:48:16 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/17 15:10:29 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
+
 #include "fdf.h"
 
 char	**ft_read_input(char *input)
@@ -24,13 +24,7 @@ char	**ft_read_input(char *input)
 	fd = open(input, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
-		ft_realloc_pt(&ret);
-		while (ft_strlen(line) > ft_strlen(ret[i]))
-		{
-			ft_realloc(&ret[i]);
-			ret[i] = line;
-		}
-		i++;
+		
 	}
 	close(fd);
 	return (ret);
@@ -48,17 +42,14 @@ void	ft_put_tab(char **tab)
 	}
 }
 
-void	ft_realloc(char **str)
+int		ft_realloc(char **str)
 {
-	char 	*tmp;
+	char	*tmp;
 
 	tmp = ft_strdup(*str);
-	if (!(*str = malloc(char*) * 8 + ft_strlen(*str)))
+	if (!(*str = malloc((sizeof(char *) * 8 + ft_strlen(*str)))))
 		return (0);
 	ft_strcpy(*str, tmp);
+	free(tmp);
+	return (1);
 }
-
-void	ft_realloc_pt(char ***str)
-{
-
-}*/

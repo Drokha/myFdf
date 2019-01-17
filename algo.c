@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:33:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/17 14:40:46 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/17 18:37:23 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	ft_line_tiles(t_info *info)
 	}
 }
 
-void	ft_draw_tiles_iso(s_data *data)
+void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 {
 	t_coord coord;
 
 	coord.x1 = ((data->x - data->y) * 64);
-	coord.y1 = ((data->x + data->y) * 32);
+	coord.y1 = ((data->x + data->y) * 32 + map->map[data->x][data->y]);
 	coord.x2 = ((data->x + 1 - data->y) * 64);
-	coord.y2 = ((data->x + 1 + data->y) * 32);
+	coord.y2 = (((data->x + 1 + data->y) * 32) + map->map[data->x][data->y]);
 	coord.x3 = (((data->x + 1) - (data->y + 1)) * 64);
-	coord.y3 = (((data->x + 1) + (data->y + 1)) * 32);
+	coord.y3 = ((((data->x + 1) + (data->y + 1)) * 32) + map->map[data->x][data->y]);
 	coord.x4 = ((data->x - (data->y + 1)) * 64);
-	coord.y4 = ((data->x + (data->y + 1)) * 32);
+	coord.y4 = (((data->x + (data->y + 1)) * 32) + map->map[data->x][data->y]);
 	if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
 		coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
 		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN)
