@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/15 15:41:50 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/17 14:44:57 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,25 @@ int		deal_mouse(int button, int x, int y, t_mouse_info *info)
 
 int		deal_key(int key, s_data *data)
 {
+	int i;
+
+	i = 0;
 	ft_putnbr(key);
 	ft_putendl("");
 	if (key == 36)
-		mlx_string_put(data->init, data->win,
+		mlx_string_put(data->ptr, data->win,
 		150, 150, 123, "BONJOUR !\n C LE BOULGOUR");
 	if (key == 53)
 		exit(1);
+	if (key == 69)
+	{
+		while (i < 100)
+		{
+			ft_draw_tiles_iso(data);
+			data->x++;
+			i++;
+		}
+	}
 	return (0);
 }
 
@@ -88,21 +100,17 @@ int		main(int ac, char **av)
 {
 	s_data			data;
 	t_mouse_info	info;
-	if (ac == 2)
-	{
-		ft_put_tab(ft_read_input(av[1]));
-	}
 
 	/*
 	u = x*cos(α) + y*cos(α+120°) + z*cos(α-120°)
 	v = x*sin(α) + y*sin(α+120°) + z*sin(α-120°)
 	*/
-	data.init = mlx_init();
-	info.ptr = data.init;
-	data.win = mlx_new_window(data.init, 1000, 1000, "window1");
+	data.ptr = mlx_init();
+	info.ptr = data.ptr;
+	data.win = mlx_new_window(data.ptr, MAP_LEN, MAP_LEN, "window1");
 	info.win = data.win;
 	info.color = 123;
 	mlx_key_hook(data.win, deal_key, &data);
 	mlx_mouse_hook(data.win, deal_mouse, &info);
-	mlx_loop(data.init);
+	mlx_loop(data.ptr);
 }

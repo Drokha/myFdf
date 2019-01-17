@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/15 16:07:50 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/17 14:37:30 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
+#define MAP_LEN 1000
+
 typedef	struct 	t_data
 {
-	void 	*init;
+	void 	*ptr;
 	void 	*win;
 	int 	x;
 	int		y;
@@ -66,4 +68,8 @@ int			deal_mouse(int button, int x, int y, t_mouse_info *info);
 void		ft_put_tab(char **tab);
 void		ft_realloc(char *str);
 void		ft_line(t_mouse_info *info);
+void		ft_line_tiles(t_info *info);
+void		ft_draw_losange(t_coord *coord, s_data *data);
+void		ft_line_xy(s_data *data, int x1, int y1, int x2, int y2);
+void		ft_draw_tiles_iso(s_data *data);
 void		ft_line_tiles(t_info *info);

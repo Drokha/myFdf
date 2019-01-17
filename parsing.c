@@ -6,10 +6,11 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:56:22 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/14 15:55:22 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/17 14:48:16 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "fdf.h"
 
 char	**ft_read_input(char *input)
@@ -60,4 +61,4 @@ void	ft_realloc(char **str)
 void	ft_realloc_pt(char ***str)
 {
 
-}
+}*/
