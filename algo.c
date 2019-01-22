@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:33:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/17 18:37:23 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:57:00 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,21 @@ void	ft_line_tiles(t_info *info)
 void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 {
 	t_coord coord;
-
-	coord.x1 = ((data->x - data->y) * 64);
-	coord.y1 = ((data->x + data->y) * 32 + map->map[data->x][data->y]);
-	coord.x2 = ((data->x + 1 - data->y) * 64);
-	coord.y2 = (((data->x + 1 + data->y) * 32) + map->map[data->x][data->y]);
-	coord.x3 = (((data->x + 1) - (data->y + 1)) * 64);
-	coord.y3 = ((((data->x + 1) + (data->y + 1)) * 32) + map->map[data->x][data->y]);
-	coord.x4 = ((data->x - (data->y + 1)) * 64);
-	coord.y4 = (((data->x + (data->y + 1)) * 32) + map->map[data->x][data->y]);
+	coord.x1 = ((data->x - data->y) * XL + mov);
+	if (data->y + 1 < 17 || data->x + 1 < 11)
+		coord.y1 = ((data->x + data->y) * YL - map->map[data->y][data->x] + mov);
+	coord.x2 = ((data->x + 1 - data->y) * XL + mov);
+	if (data->y + 1 < 17 || data->x + 1 < 11)
+		coord.y2 = (((data->x + 1 + data->y) * YL) - map->map[data->y][data->x + 1] + mov);
+	coord.x3 = (((data->x + 1) - (data->y + 1)) * XL + mov);
+	if (data->y + 1 < 17 || data->x + 1 < 11)
+		coord.y3 = ((((data->x + 1) + (data->y + 1)) * YL) - map->map[data->y + 1][data->x + 1] + mov);
+	coord.x4 = ((data->x - (data->y + 1)) * XL + mov);
+	if (data->y + 1 < 17 || data->x + 1 < 11)
+		coord.y4 = (((data->x + (data->y + 1)) * YL) - map->map[data->y + 1][data->x] + mov);
 	if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
 		coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
-		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN)
+		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN || data->y > 18)
 	{
 		data->x = 0;
 		data->y++;
@@ -71,11 +74,14 @@ void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 void	ft_draw_losange(t_coord *coord, s_data *data)
 {
 	t_info info;
-	
-	ft_line_xy(data, coord->x1, coord->y1, coord->x2, coord->y2);
-	ft_line_xy(data, coord->x2, coord->y2, coord->x3, coord->y3);
-	ft_line_xy(data, coord->x3, coord->y3, coord->x4, coord->y4);
-	ft_line_xy(data, coord->x4, coord->y4, coord->x1, coord->y1);
+	if (coord->x1>0 && coord->x2>0 && coord->x3>0 && coord->x4>0 && coord->y1>0 &&
+	coord->y2>0 && coord->y3>0 && coord->y4>0)
+	{
+		ft_line_xy(data, coord->x1, coord->y1, coord->x2, coord->y2);
+		ft_line_xy(data, coord->x2, coord->y2, coord->x3, coord->y3);
+		ft_line_xy(data, coord->x3, coord->y3, coord->x4, coord->y4);
+		ft_line_xy(data, coord->x4, coord->y4, coord->x1, coord->y1);
+	}
 }
 
 void	ft_line_xy(s_data *data, int x1, int y1, int x2, int y2)

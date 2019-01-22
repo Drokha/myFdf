@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/17 18:40:26 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:58:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ int		deal_mouse(int button, int x, int y, t_mouse_info *info)
 	return (info->set);
 }
 
-int		deal_key(int key, s_data *data, t_map_info *map)
+int		deal_key(int key, s_data *data)
 {
 	int i;
+	t_map_info *map = data->map;
 
 	i = 0;
 	ft_putnbr(key);
@@ -86,7 +87,7 @@ int		deal_key(int key, s_data *data, t_map_info *map)
 		exit(1);
 	if (key == 69)
 	{
-		while (i < 100)
+		while (i < 12 * 19)
 		{
 			ft_draw_tiles_iso(data, map);
 			data->x++;
@@ -106,7 +107,7 @@ int		main(int ac, char **av)
 	data.ptr = mlx_init();
 	info.ptr = data.ptr;
 	map.ptr = data.ptr;
-	data.win = mlx_new_window(data.ptr, MAP_LEN, MAP_LEN, "window1");
+	data.win = mlx_new_window(data.ptr, 1000, 1000, "window1");
 	info.win = data.win;
 	map.win = data.win;
 	info.color = 123;
@@ -116,7 +117,9 @@ int		main(int ac, char **av)
 		if (!(ft_get_map(&map, fd)))
 			return (0);
 		ft_put_map(&map);
+	ft_putendl("");
 	}
+	data.map = &map;
 	mlx_key_hook(data.win, deal_key, &data);
 	mlx_mouse_hook(data.win, deal_mouse, &map);
 	mlx_loop(data.ptr);
