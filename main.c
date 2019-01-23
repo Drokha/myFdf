@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/22 16:58:04 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/23 16:56:13 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		deal_key(int key, s_data *data)
 {
 	int i;
 	t_map_info *map = data->map;
-
+	s_data img;
 	i = 0;
 	ft_putnbr(key);
 	ft_putendl("");
@@ -85,13 +85,96 @@ int		deal_key(int key, s_data *data)
 		150, 150, 123, "BONJOUR !\n C LE BOULGOUR");
 	if (key == 53)
 		exit(1);
-	if (key == 69)
+	if (key == 83)
 	{
-		while (i < 12 * 19)
+		while (data->y < map->largeur - 2)
 		{
 			ft_draw_tiles_iso(data, map);
 			data->x++;
 			i++;
+		}
+	}
+	if (key == 124)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		data->decX -= 10;
+		data->x = 0;
+		data->y = 0;
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+			data->x++;
+			i++;
+		}
+	}
+	if (key == 123)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		data->decX += 10;
+		data->x = 0;
+		data->y = 0;
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+			data->x++;
+			i++;
+		}
+	}
+	if (key == 125)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		data->decY -= 10;
+		data->x = 0;
+		data->y = 0;
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+			data->x++;
+			i++;
+		}
+	}
+	if (key == 126)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		data->decY += 10;
+		data->x = 0;
+		data->y = 0;
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+			data->x++;
+			i++;
+		}
+	}
+	if (key == 69)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		data->XL = data->XL + 2;
+		data->YL = data->XL / 2;
+		data->x = 0;
+		data->y = 0;
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+			data->x++;
+			i++;
+		}
+	}
+	if (key == 78)
+	{
+		mlx_clear_window(data->ptr,data->win);
+		if (data->XL > 2)
+		{
+			data->XL = data->XL - 2;
+			data->YL = data->XL / 2;
+			data->x = 0;
+			data->y = 0;
+			while (data->y < map->largeur - 2)
+			{
+				ft_draw_tiles_iso(data, map);
+				data->x++;
+				i++;
+			}
 		}
 	}
 	return (0);
@@ -119,6 +202,13 @@ int		main(int ac, char **av)
 		ft_put_map(&map);
 	ft_putendl("");
 	}
+	data.XL = 32;
+	data.YL = data.XL / 2;
+	data.decX = 0;
+	data.decY = 0;
+	ft_putnbr(map.largeur);
+	ft_putendl("");
+	ft_putnbr(map.longueur);
 	data.map = &map;
 	mlx_key_hook(data.win, deal_key, &data);
 	mlx_mouse_hook(data.win, deal_mouse, &map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 15:40:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/17 16:51:53 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/23 14:03:44 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,20 @@ int		ft_get_map(t_map_info *map, int fd)
 	char	**tmp;
 	int		i;
 	int		j;
+	int		cap;
 
+	cap =
 	i = 0;
 	if (!(c_map = ft_get_char_map(fd)))
 		return (0);
-	/*if (!(test_input(c_map)))
-		return (0);*/
 	map->largeur = ft_tab_len(c_map);
 	if (!(map->map = (int **)malloc(sizeof(int *) * map->largeur)))
 		return (0);
 	while (i < map->largeur)
 	{
 		tmp = ft_strsplit(c_map[i], ' ');
-		map->longueur = ft_tab_len(tmp);
+		if (cap++ == 0)
+			map->longueur = ft_tab_len(tmp);
 		if (!((map->map)[i] = (int *)malloc(sizeof(int) * map->longueur)))
 			return (0);
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/22 17:05:28 by trabut           ###   ########.fr       */
+/*   Updated: 2019/01/23 16:45:37 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
 # define MAP_LEN 1000
 # define mov 300
-# define XL 32
-# define YL XL / 2
 typedef struct  s_mouse_info
 {
 	void			*ptr;
@@ -65,9 +63,9 @@ typedef		struct	s_map_info
 {
 	void	*ptr;
 	void	*win;
-	int	**map;
-	int longueur;
-	int largeur;
+	int		**map;
+	int		longueur;
+	int 	largeur;
 }					t_map_info;
 
 typedef	struct 	t_data
@@ -76,6 +74,10 @@ typedef	struct 	t_data
 	void 	*win;
 	int 	x;
 	int		y;
+	int		XL;
+	int		YL;
+	int		decX;
+	int		decY;
 	int 	color;
 	t_map_info *map;
 }				s_data;
