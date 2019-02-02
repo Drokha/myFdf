@@ -6,11 +6,32 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/23 16:56:13 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/02 20:37:12 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void 	ft_change_height(t_map_info *map, int a)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < map->largeur)
+	{
+		j = 0;
+		while(j < map->longueur)
+		{
+			if (a && map->map[i][j])
+				map->map[i][j] += 2;
+			else if (map->map[i][j] > 2)
+				map->map[i][j] -= 2;
+			j++;
+		}
+		i++;
+	}
+}
 
 void	ft_line(t_mouse_info *info)
 {
@@ -80,6 +101,7 @@ int		deal_key(int key, s_data *data)
 	i = 0;
 	ft_putnbr(key);
 	ft_putendl("");
+	data->height = 0;
 	if (key == 36)
 		mlx_string_put(data->ptr, data->win,
 		150, 150, 123, "BONJOUR !\n C LE BOULGOUR");
@@ -167,17 +189,36 @@ int		deal_key(int key, s_data *data)
 		{
 			data->XL = data->XL - 2;
 			data->YL = data->XL / 2;
-			data->x = 0;
-			data->y = 0;
-			while (data->y < map->largeur - 2)
-			{
-				ft_draw_tiles_iso(data, map);
-				data->x++;
-				i++;
-			}
+			
 		}
 	}
+	if (key == 30)
+	{
+		ft_change_height(map, 1);
+		ft_draw_re(data, map);
+	}
+	if (key == 33)
+	{
+		ft_change_height(map, 0);
+		ft_draw_re(data, map);
+	}
 	return (0);
+}
+
+void	ft_draw_re(s_data *data, t_map_info *map)
+{
+	int i;
+
+	i = 0;
+	mlx_clear_window(data->ptr,data->win);
+	data->x = 0;
+	data->y = 0;
+	while (data->y < map->largeur - 2)
+	{
+		ft_draw_tiles_iso(data, map);
+		data->x++;
+		i++;
+	}
 }
 
 int		main(int ac, char **av)

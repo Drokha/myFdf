@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/01/23 16:45:37 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/02 20:32:50 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef	struct 	t_data
 	int		decX;
 	int		decY;
 	int 	color;
+	int		height;
 	t_map_info *map;
 }				s_data;
 
@@ -100,3 +101,5 @@ int			test_input(char **map);
 char		**ft_get_char_map(int fd);
 int			ft_get_map(t_map_info *map, int fd);
 void		ft_put_map(t_map_info *map);
+void		ft_draw_re(s_data *data, t_map_info *map);
+void 		ft_change_height(t_map_info *map, int a);
