@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/02 20:37:12 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:47:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,88 +109,39 @@ int		deal_key(int key, s_data *data)
 		exit(1);
 	if (key == 83)
 	{
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 124)
 	{
-		mlx_clear_window(data->ptr,data->win);
 		data->decX -= 10;
-		data->x = 0;
-		data->y = 0;
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 123)
 	{
-		mlx_clear_window(data->ptr,data->win);
 		data->decX += 10;
-		data->x = 0;
-		data->y = 0;
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 125)
 	{
-		mlx_clear_window(data->ptr,data->win);
 		data->decY -= 10;
-		data->x = 0;
-		data->y = 0;
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 126)
 	{
-		mlx_clear_window(data->ptr,data->win);
 		data->decY += 10;
-		data->x = 0;
-		data->y = 0;
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 69)
 	{
-		mlx_clear_window(data->ptr,data->win);
 		data->XL = data->XL + 2;
 		data->YL = data->XL / 2;
-		data->x = 0;
-		data->y = 0;
-		while (data->y < map->largeur - 2)
-		{
-			ft_draw_tiles_iso(data, map);
-			data->x++;
-			i++;
-		}
+		ft_draw_re(data, map);
 	}
 	if (key == 78)
 	{
-		mlx_clear_window(data->ptr,data->win);
-		if (data->XL > 2)
-		{
-			data->XL = data->XL - 2;
-			data->YL = data->XL / 2;
-			
-		}
+		data->XL = data->XL - 2;
+		data->YL = data->XL / 2;
+		ft_draw_re(data, map);
 	}
 	if (key == 30)
 	{
@@ -207,17 +158,12 @@ int		deal_key(int key, s_data *data)
 
 void	ft_draw_re(s_data *data, t_map_info *map)
 {
-	int i;
-
-	i = 0;
 	mlx_clear_window(data->ptr,data->win);
 	data->x = 0;
 	data->y = 0;
 	while (data->y < map->largeur - 2)
 	{
 		ft_draw_tiles_iso(data, map);
-		data->x++;
-		i++;
 	}
 }
 
@@ -243,10 +189,10 @@ int		main(int ac, char **av)
 		ft_put_map(&map);
 	ft_putendl("");
 	}
-	data.XL = 32;
+	data.XL = 4;
 	data.YL = data.XL / 2;
-	data.decX = 0;
-	data.decY = 0;
+	data.decX = 300;
+	data.decY = 300;
 	ft_putnbr(map.largeur);
 	ft_putendl("");
 	ft_putnbr(map.longueur);

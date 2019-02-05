@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:33:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/02 20:42:39 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:44:21 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,25 @@ void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 {
 	t_coord coord;
 
-	if (data->y < 17 || data->x < 11 || data->y < map->largeur - 1)
+	coord.x1 = ((data->x - data->y) * data->XL + data->decX);
+	coord.y1 = ((data->x + data->y) * data->YL - (map->map[data->y][data->x]) + data->decY);
+	coord.x2 = ((data->x + 1 - data->y) * data->XL + data->decX);
+	coord.y2 = (((data->x + 1 + data->y) * data->YL) - (map->map[data->y][data->x + 1]) + data->decY);
+	coord.x3 = (((data->x + 1) - (data->y + 1)) * data->XL + data->decX);
+	coord.y3 = ((((data->x + 1) + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x + 1]) + data->decY);
+	coord.x4 = ((data->x - (data->y + 1)) * data->XL + data->decX);
+	coord.y4 = (((data->x + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x]) + data->decY);
+	if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
+		coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
+		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN || data->x > map->longueur - 2)
 	{
-		coord.x1 = ((data->x - data->y) * data->XL + data->decX);
-		coord.y1 = ((data->x + data->y) * data->YL - (map->map[data->y][data->x]) + data->decY);
-		coord.x2 = ((data->x + 1 - data->y) * data->XL + data->decX);
-		coord.y2 = (((data->x + 1 + data->y) * data->YL) - (map->map[data->y][data->x + 1]) + data->decY);
-		coord.x3 = (((data->x + 1) - (data->y + 1)) * data->XL + data->decX);
-		coord.y3 = ((((data->x + 1) + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x + 1]) + data->decY);
-		coord.x4 = ((data->x - (data->y + 1)) * data->XL + data->decX);
-		coord.y4 = (((data->x + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x]) + data->decY);
-	
-		if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
-			coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
-			coord.y3 > MAP_LEN || coord.y4 > MAP_LEN || data->x > map->longueur - 2)
-		{
-			data->x = 0;
-			data->y++;
-		}
-		else
-			ft_draw_losange(&coord, data);
+		data->x = 0;
+		data->y++;
+	}
+	else
+	{
+		ft_draw_losange(&coord, data);
+		data->x++;
 	}
 }
 

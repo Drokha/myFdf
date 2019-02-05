@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/02 20:32:50 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:03:56 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,17 @@ typedef		struct	s_map_info
 
 typedef	struct 	t_data
 {
-	void 	*ptr;
-	void 	*win;
-	int 	x;
-	int		y;
-	int		XL;
-	int		YL;
-	int		decX;
-	int		decY;
-	int 	color;
-	int		height;
-	t_map_info *map;
+	void 		*ptr;
+	void 		*win;
+	int 		x;
+	int			y;
+	int			XL;
+	int			YL;
+	int			decX;
+	int			decY;
+	int 		color;
+	int			height;
+	t_map_info 	*map;
 }				s_data;
 
 char		**ft_read_input(char *input);
