@@ -1,21 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo.c                                             :+:      :+:    :+:   */
+/*   algo_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/15 15:33:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/11 17:54:11 by trabut           ###   ########.fr       */
+/*   Created: 2019/02/11 14:43:37 by trabut            #+#    #+#             */
+/*   Updated: 2019/02/11 15:12:45 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+
+
+/*make
+void	ft_line_tiles(t_info *info)
+{
+	int dx;
+	int sx;
+	int dy;
+	int sy;
+	int err;
+	int e2;
+
+	dx = abs(info->x2 - info->x1);
+	sx = info->x1 < info->x2 ? 1 : -1;
+	dy = abs(info->y2 - info->y1);
+	sy = info->y1 < info->y2 ? 1 : -1;
+	err = (dx > dy ? dx : -dy) / 2;
+	while (1)
+	{
+		if (info->x1 == info->x2 && info->y1 == info->y2)
+			break ;
+		mlx_pixel_put(info->ptr, info->win, info->x1, info->y1, 000377000377);
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			info->x1 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			info->y1 += sy;
+		}
+	}
+}
 
 void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 {
 	t_coord coord;
 
+	ft_putendl("bof");
 	coord.x1 = ((data->x - data->y) * data->XL + data->decX);
 	coord.y1 = ((data->x + data->y) * data->YL - (map->map[data->y][data->x]) + data->decY);
 	coord.x2 = ((data->x + 1 - data->y) * data->XL + data->decX);
@@ -26,23 +61,18 @@ void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 	coord.y4 = (((data->x + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x]) + data->decY);
 	if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
 		coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
-		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN ||
-		coord.x1 < 0 || coord.x2 < 0 || coord.x3 < 0 ||
-		coord.x4 < 0 || coord.y1 < 0 || coord.y2 < 0 ||
-		coord.y3 < 0 || coord.y4 < 0)
+		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN || data->x > map->longueur - 2)
 	{
-		data->x++;
-		if (data->x > map->longueur - 2)
-		{
-			data->y++;
-			data->x = 0;
-		}
+		data->x = 0;
+		data->y++;
 	}
 	else
 	{
+		ft_putendl("calldraw");
 		ft_draw_losange(&coord, data);
 		data->x++;
 	}
+	ft_putendl("eofunc");
 }
 
 void	ft_draw_losange(t_coord *coord, s_data *data)
@@ -55,6 +85,7 @@ void	ft_draw_losange(t_coord *coord, s_data *data)
 		ft_line_xy(data, coord->x3, coord->y3, coord->x4, coord->y4);
 		ft_line_xy(data, coord->x4, coord->y4, coord->x1, coord->y1);
 	}
+	ft_putendl("draw");
 }
 
 void	ft_line_xy(s_data *data, int x1, int y1, int x2, int y2)
@@ -75,7 +106,7 @@ void	ft_line_xy(s_data *data, int x1, int y1, int x2, int y2)
 	{
 		if (x1 == x2 && y1 == y2)
 			break ;
-		ft_img_mod(x1, y1, data);
+		mlx_pixel_put(data->ptr, data->win, x1, y1, 000377000377);
 		e2 = err;
 		if (e2 > -dx)
 		{
@@ -88,13 +119,4 @@ void	ft_line_xy(s_data *data, int x1, int y1, int x2, int y2)
 			y1 += sy;
 		}
 	}
-}
-
-void	ft_img_mod(int x, int y, s_data *data)
-{
-	int pos;
-
-	pos = x * 4;
-	pos += y * 500 * 4;
-	data->addr[pos] = 90;
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/05 17:47:04 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/11 17:53:59 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		deal_key(int key, s_data *data)
 {
 	int i;
 	t_map_info *map = data->map;
-	s_data img;
+
 	i = 0;
 	ft_putnbr(key);
 	ft_putendl("");
@@ -107,6 +107,10 @@ int		deal_key(int key, s_data *data)
 		150, 150, 123, "BONJOUR !\n C LE BOULGOUR");
 	if (key == 53)
 		exit(1);
+	if (key == 4)
+	{
+		ft_drawimg(data);
+	}
 	if (key == 83)
 	{
 		ft_draw_re(data, map);
@@ -155,16 +159,36 @@ int		deal_key(int key, s_data *data)
 	}
 	return (0);
 }
+void 	ft_drawimg(s_data *data)
+{
+	data->img = mlx_new_image(data->ptr, 500, 500);
+	ft_line_xy(data, 150, 150, 300, 300);
+	mlx_string_put(data->ptr, data->img, 300, 300, 000377000377, "GNEUGNEU");
+	mlx_put_image_to_window(data->ptr, data->win, data->img, 0, 00);
+}
 
 void	ft_draw_re(s_data *data, t_map_info *map)
 {
-	mlx_clear_window(data->ptr,data->win);
+	//mlx_clear_window(data->ptr, data->win);
 	data->x = 0;
 	data->y = 0;
+	int bpp = 32;
+	int size_l = 500 * 4;
+	int i;
+	int endian = 0;
+	data->img = mlx_new_image(data->ptr, 500, 500);
+	data->addr = mlx_get_data_addr(data->img, &bpp, &size_l, &endian);
+	//mlx_put_image_to_window(data->ptr, data->win, data->img, 0, 0);
 	while (data->y < map->largeur - 2)
 	{
 		ft_draw_tiles_iso(data, map);
 	}
+	/*while(i < 1000)
+	{
+		ft_putendl("b");
+		data->addr[i++] = 90;
+	}*/
+	mlx_put_image_to_window(data->ptr, data->win, data->img, 0, 0);
 }
 
 int		main(int ac, char **av)
