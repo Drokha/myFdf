@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 18:00:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/11 17:53:59 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/14 17:04:45 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,18 @@ int		deal_key(int key, s_data *data)
 		150, 150, 123, "BONJOUR !\n C LE BOULGOUR");
 	if (key == 53)
 		exit(1);
+	if (key == 84)
+	{
+		data->proj = 0;
+		ft_draw_re(data, map);
+	}
 	if (key == 4)
 	{
 		ft_drawimg(data);
 	}
 	if (key == 83)
 	{
+		data->proj = 1;
 		ft_draw_re(data, map);
 	}
 	if (key == 124)
@@ -149,12 +155,12 @@ int		deal_key(int key, s_data *data)
 	}
 	if (key == 30)
 	{
-		ft_change_height(map, 1);
+		data->mult++;
 		ft_draw_re(data, map);
 	}
 	if (key == 33)
 	{
-		ft_change_height(map, 0);
+		data->mult--;
 		ft_draw_re(data, map);
 	}
 	return (0);
@@ -169,26 +175,26 @@ void 	ft_drawimg(s_data *data)
 
 void	ft_draw_re(s_data *data, t_map_info *map)
 {
-	//mlx_clear_window(data->ptr, data->win);
 	data->x = 0;
 	data->y = 0;
 	int bpp = 32;
-	int size_l = 500 * 4;
+	int size_l = MAP_LEN * 4;
 	int i;
 	int endian = 0;
-	data->img = mlx_new_image(data->ptr, 500, 500);
+	data->img = mlx_new_image(data->ptr, MAP_LEN, MAP_LEN);
 	data->addr = mlx_get_data_addr(data->img, &bpp, &size_l, &endian);
-	//mlx_put_image_to_window(data->ptr, data->win, data->img, 0, 0);
-	while (data->y < map->largeur - 2)
-	{
-		ft_draw_tiles_iso(data, map);
-	}
-	/*while(i < 1000)
-	{
-		ft_putendl("b");
-		data->addr[i++] = 90;
-	}*/
-	mlx_put_image_to_window(data->ptr, data->win, data->img, 0, 0);
+	if (data->proj == 1)
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_iso(data, map);
+		}
+	else 
+		while (data->y < map->largeur - 2)
+		{
+			ft_draw_tiles_caval(data, map);
+		}
+	mlx_put_image_to_window(data->ptr, data->win, data->img, 250, 250);
+	mlx_destroy_image(data->ptr, data->img);
 }
 
 int		main(int ac, char **av)
@@ -217,6 +223,7 @@ int		main(int ac, char **av)
 	data.YL = data.XL / 2;
 	data.decX = 300;
 	data.decY = 300;
+	data.mult = 1;
 	ft_putnbr(map.largeur);
 	ft_putendl("");
 	ft_putnbr(map.longueur);

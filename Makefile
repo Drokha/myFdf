@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 17:53:12 by trabut            #+#    #+#              #
-#    Updated: 2019/01/17 16:37:55 by trabut           ###   ########.fr        #
+#    Updated: 2019/02/14 16:27:09 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.c algo.c test_input.c parsing2.c mem_func.c ./get_next_line/get_next_line.c
+SRC = main.c algo.c test_input.c parsing2.c mem_func.c ./get_next_line/get_next_line.c algo_img.c
 
 OBJ =
 

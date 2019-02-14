@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:33:59 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/11 17:54:11 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/14 16:59:25 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	ft_draw_tiles_iso(s_data *data, t_map_info *map)
 	t_coord coord;
 
 	coord.x1 = ((data->x - data->y) * data->XL + data->decX);
-	coord.y1 = ((data->x + data->y) * data->YL - (map->map[data->y][data->x]) + data->decY);
+	coord.y1 = ((data->x + data->y) * data->YL - (map->map[data->y][data->x] * data->mult) + data->decY);
 	coord.x2 = ((data->x + 1 - data->y) * data->XL + data->decX);
-	coord.y2 = (((data->x + 1 + data->y) * data->YL) - (map->map[data->y][data->x + 1]) + data->decY);
+	coord.y2 = (((data->x + 1 + data->y) * data->YL) - (map->map[data->y][data->x + 1] * data->mult) + data->decY);
 	coord.x3 = (((data->x + 1) - (data->y + 1)) * data->XL + data->decX);
-	coord.y3 = ((((data->x + 1) + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x + 1]) + data->decY);
+	coord.y3 = ((((data->x + 1) + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x + 1] * data->mult) + data->decY);
 	coord.x4 = ((data->x - (data->y + 1)) * data->XL + data->decX);
-	coord.y4 = (((data->x + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x]) + data->decY);
+	coord.y4 = (((data->x + (data->y + 1)) * data->YL) - (map->map[data->y + 1][data->x] * data->mult) + data->decY);
 	if (coord.x1 > MAP_LEN || coord.x2 > MAP_LEN || coord.x3 > MAP_LEN ||
 		coord.x4 > MAP_LEN || coord.y1 > MAP_LEN || coord.y2 > MAP_LEN ||
-		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN ||
+		coord.y3 > MAP_LEN || coord.y4 > MAP_LEN || data->x > data->map->longueur - 2 ||
 		coord.x1 < 0 || coord.x2 < 0 || coord.x3 < 0 ||
 		coord.x4 < 0 || coord.y1 < 0 || coord.y2 < 0 ||
 		coord.y3 < 0 || coord.y4 < 0)
@@ -95,6 +95,11 @@ void	ft_img_mod(int x, int y, s_data *data)
 	int pos;
 
 	pos = x * 4;
-	pos += y * 500 * 4;
-	data->addr[pos] = 90;
+	pos += y * MAP_LEN * 4;
+	if(pos+2 < MAP_LEN * 4 * MAP_LEN)
+	{
+		data->addr[pos + 2] = 90;
+		data->addr[pos+1] = 0;
+		data->addr[pos] = 90;
+	}
 }

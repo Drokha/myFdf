@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:53:38 by trabut            #+#    #+#             */
-/*   Updated: 2019/02/11 17:54:03 by trabut           ###   ########.fr       */
+/*   Updated: 2019/02/14 17:04:51 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
-# define MAP_LEN 500
+# define MAP_LEN 750
 # define mov 300
 typedef struct  s_mouse_info
 {
@@ -74,6 +74,8 @@ typedef	struct 	t_data
 	void 		*win;
 	int 		x;
 	int			y;
+	int			mult;
+	int			proj;
 	int			XL;
 	int			YL;
 	int			decX;
@@ -107,3 +109,4 @@ void		ft_draw_re(s_data *data, t_map_info *map);
 void 		ft_change_height(t_map_info *map, int a);
 void 		ft_drawimg(s_data *data);
 void		ft_img_mod(int x, int y, s_data *data);
+void		ft_draw_tiles_caval(s_data *data, t_map_info *map);
